@@ -57,11 +57,21 @@ preprocess_pipeline = ColumnTransformer(
     transformers=[
         # TODO,
         (
+            "sqrt_transformer",
+            FunctionTransformer(np.sqrt),
+            ["size"],
+        ),
+        (
             "floor_extractor",
             FunctionTransformer(floor_extractor, kw_args={"col": "floor"}),
             ["floor"],
         ),
         # TODO,
+        (
+            "target_encoder",
+            TargetEncoder(),  # fit과 transform method가 이미 있어서 FunctionTransformer를 사용할 이유가 없어짐
+            CAT_FEATURES,
+        ),
     ],
     remainder="passthrough",
     verbose_feature_names_out=False,
