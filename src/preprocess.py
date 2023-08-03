@@ -24,6 +24,13 @@ def extract_floor(floor_info: str) -> int:
         floor_info (str): 층수 정보
     """
     # TODO
+    real_floor = floor_info.split(" ")[0]
+    if real_floor in ("Upper", "Lower", "Ground"):
+        real_floor = 0
+    else:
+        real_floor = int(real_floor)
+
+    return real_floor
 
 
 def floor_extractor(df: pd.DataFrame, col: str) -> pd.DataFrame:
